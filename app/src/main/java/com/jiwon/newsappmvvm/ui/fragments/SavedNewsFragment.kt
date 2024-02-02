@@ -1,10 +1,11 @@
-package com.jiwon.newsappmvvm.fragments
+package com.jiwon.newsappmvvm.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -18,9 +19,11 @@ import com.jiwon.newsappmvvm.databinding.FragmentSearchNewsBinding
 import com.jiwon.newsappmvvm.ui.NewsActivity
 import com.jiwon.newsappmvvm.ui.NewsViewModel
 import com.jiwon.newsappmvvm.util.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SavedNewsFragment : Fragment() {
-    lateinit var viewModel: NewsViewModel
+    private val viewModel: NewsViewModel by viewModels()
     lateinit var binding: FragmentSavedNewsBinding
     lateinit var newsAdapter: NewsAdapter
 
@@ -42,7 +45,7 @@ class SavedNewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as NewsActivity).viewModel
+//        viewModel = (activity as NewsActivity).viewModel
 
         viewModel.getSavedNews().observe(viewLifecycleOwner, Observer { list ->
             newsAdapter.differ.submitList(list)

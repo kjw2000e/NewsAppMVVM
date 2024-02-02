@@ -1,4 +1,4 @@
-package com.jiwon.newsappmvvm.fragments
+package com.jiwon.newsappmvvm.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -20,9 +21,11 @@ import com.jiwon.newsappmvvm.ui.NewsActivity
 import com.jiwon.newsappmvvm.ui.NewsViewModel
 import com.jiwon.newsappmvvm.util.Constants
 import com.jiwon.newsappmvvm.util.Constants.Companion.BUNDLE_KEY_ARTICLE
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ArticleFragment : Fragment() {
-    lateinit var viewModel: NewsViewModel
+    private val viewModel: NewsViewModel by viewModels()
     lateinit var binding: FragmentArticleBinding
 
     val args: ArticleFragmentArgs by navArgs()
@@ -57,7 +60,7 @@ class ArticleFragment : Fragment() {
             loadUrl(article.url)
         }
 
-        viewModel = (activity as NewsActivity).viewModel
+//        viewModel = (activity as NewsActivity).viewModel
 
         binding.fab.setOnClickListener {
             viewModel.saveNews(article)

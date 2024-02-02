@@ -8,10 +8,13 @@ import com.jiwon.newsappmvvm.model.Article
 import com.jiwon.newsappmvvm.model.NewsResponse
 import com.jiwon.newsappmvvm.repository.NewsRepository
 import com.jiwon.newsappmvvm.util.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
-class NewsViewModel(
+@HiltViewModel
+class NewsViewModel @Inject constructor(
     val newsRepository: NewsRepository
 ): ViewModel() {
     private val _breakingNewsList: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
